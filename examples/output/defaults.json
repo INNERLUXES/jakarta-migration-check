@@ -1,0 +1,43 @@
+{
+  "name": "built-in defaults",
+  "files": [
+    "**/*.java",
+    "**/*.kt",
+    "**/*.kts",
+    "**/pom.xml",
+    "**/*.gradle",
+    "**/*.versions.toml",
+    "**/web.xml",
+    "**/web-fragment.xml",
+    "**/beans.xml",
+    "**/faces-config.xml",
+    "**/ejb-jar.xml",
+    "**/application.xml",
+    "**/application-client.xml",
+    "**/persistence.xml",
+    "**/orm.xml",
+    "**/validation.xml",
+    "**/batch.xml",
+    "**/ra.xml",
+    "**/permissions.xml",
+    "**/META-INF/services/*"
+  ],
+  "exclude": [
+    "target/**",
+    "*/target/**",
+    "build/**",
+    "*/build/**"
+  ],
+  "packages": {},
+  "ignore": [],
+  "rules": {
+    "javaxImport": "error",
+    "javaxQualifiedName": "error",
+    "partlyMovedImport": "warning",
+    "javaxArtifact": "error",
+    "oldDescriptorNamespace": "warning",
+    "javaxNameInText": "warning",
+    "javaxServiceFile": "warning"
+  },
+  "minSeverity": "notice"
+}

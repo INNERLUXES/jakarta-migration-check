@@ -1,0 +1,2 @@
+# Registers the start-up hook of the shop.
+com.larkspur.books.web.Startup

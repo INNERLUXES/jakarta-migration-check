@@ -1,0 +1,24 @@
+jakarta-migration-check: examples/migrated
+input: examples/migrated (11 files: 4 java, 1 kotlin, 1 maven, 1 gradle, 1 catalog, 2 descriptor, 1 service)
+config: built-in defaults: 20 file patterns, 4 exclude patterns, no added moves, no ignored names; minimum severity notice
+rules: javax-import (error); javax-qualified-name (error); partly-moved-import (warning); javax-artifact (error); old-descriptor-namespace (warning); javax-name-in-text (warning); javax-service-file (warning)
+findings: 0
+
+Findings (0)
+
+  none
+
+Read: examples/migrated
+
+  files          11: 4 java, 1 kotlin, 1 maven, 1 gradle, 1 catalog, 2 descriptor, 1 service
+  imports        27 read; javax imports 12: 1 of javax.annotation, not moved, 11 in the JDK
+  code names     javax names written out in full 1: 1 in the JDK
+  texts          javax names in strings and descriptor values 0
+  dependencies   8 read; 0 Java EE artifacts
+  descriptors    2 read; 0 with a namespace of Java EE
+  service files  1 read
+  mapping        32 moved prefixes, 7 moved classes, 30 JDK prefixes, 49 artifacts, 11 namespaces; 0 added and 0 ignored by the configuration
+
+This report lists the javax names, artifacts and descriptor namespaces it found in the files it was given, against the mapping of src/mapping.js. It does not compile the code, resolve dependencies or look inside the libraries a project uses, so a clean run does not mean the project builds and runs on Jakarta EE 9 or later (docs/limits.md).
+
+RESULT: PASS - no error

@@ -1,0 +1,297 @@
+jakarta-migration-check: examples/legacy
+input: examples/legacy (11 files: 4 java, 1 kotlin, 1 maven, 1 gradle, 1 catalog, 2 descriptor, 1 service)
+config: examples/config.json (Larkspur Books): 20 file patterns, 5 exclude patterns, no added moves, no ignored names; minimum severity notice
+rules: javax-import (error); javax-qualified-name (error); partly-moved-import (warning); javax-artifact (error); old-descriptor-namespace (warning); javax-name-in-text (warning); javax-service-file (warning)
+findings: 28 (20 error, 8 warning)
+
+Findings (28)
+
+  ERROR    javax-artifact            examples/legacy/gradle/libs.versions.toml:2
+           javax.xml.bind:jaxb-api is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.xml.bind:jakarta.xml.bind-api (Jakarta XML Binding 3.0)
+           rule: a dependency of a pom.xml, a Gradle build or a version catalog whose group and artifact id are an API artifact of Java EE that holds javax packages
+           specification: Jakarta XML Binding 3.0, https://jakarta.ee/specifications/xml-binding/3.0/
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: a Maven dependency is named by its groupId and artifactId, and an exclusion inside a dependency keeps a transitive artifact out of the build (POM Reference (Apache Maven), https://maven.apache.org/pom.html)
+           basis: a Gradle build declares a dependency as a string group:name:version or with separate group, name and version arguments, in the Groovy and the Kotlin DSL (Declaring Dependencies (Gradle User Manual), https://docs.gradle.org/current/userguide/declaring_dependencies.html)
+           basis: a version catalog such as gradle/libs.versions.toml names a library with module = "group:name" or with group and name (Version Catalogs (Gradle User Manual), https://docs.gradle.org/current/userguide/version_catalogs.html)
+           basis: Maven Central keeps every artifact in a folder of its group and artifact id, so an artifact named by the tool can be looked up there (Maven Central repository, https://repo1.maven.org/maven2/)
+           the tool's own choice: an artifact is matched by its group and artifact id, never by its version, and the replacement is named the same way; an exclusion, a substitution and a value built from a property are not read as a dependency
+
+  ERROR    javax-artifact            examples/legacy/pom.xml:12
+           javax.servlet:javax.servlet-api is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.servlet:jakarta.servlet-api (Jakarta Servlet 5.0)
+           rule: a dependency of a pom.xml, a Gradle build or a version catalog whose group and artifact id are an API artifact of Java EE that holds javax packages
+           specification: Jakarta Servlet 5.0, https://jakarta.ee/specifications/servlet/5.0/
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: a Maven dependency is named by its groupId and artifactId, and an exclusion inside a dependency keeps a transitive artifact out of the build (POM Reference (Apache Maven), https://maven.apache.org/pom.html)
+           basis: a Gradle build declares a dependency as a string group:name:version or with separate group, name and version arguments, in the Groovy and the Kotlin DSL (Declaring Dependencies (Gradle User Manual), https://docs.gradle.org/current/userguide/declaring_dependencies.html)
+           basis: a version catalog such as gradle/libs.versions.toml names a library with module = "group:name" or with group and name (Version Catalogs (Gradle User Manual), https://docs.gradle.org/current/userguide/version_catalogs.html)
+           basis: Maven Central keeps every artifact in a folder of its group and artifact id, so an artifact named by the tool can be looked up there (Maven Central repository, https://repo1.maven.org/maven2/)
+           the tool's own choice: an artifact is matched by its group and artifact id, never by its version, and the replacement is named the same way; an exclusion, a substitution and a value built from a property are not read as a dependency
+
+  ERROR    javax-artifact            examples/legacy/pom.xml:18
+           javax.persistence:javax.persistence-api is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.persistence:jakarta.persistence-api (Jakarta Persistence 3.0)
+           rule: a dependency of a pom.xml, a Gradle build or a version catalog whose group and artifact id are an API artifact of Java EE that holds javax packages
+           specification: Jakarta Persistence 3.0, https://jakarta.ee/specifications/persistence/3.0/
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: a Maven dependency is named by its groupId and artifactId, and an exclusion inside a dependency keeps a transitive artifact out of the build (POM Reference (Apache Maven), https://maven.apache.org/pom.html)
+           basis: a Gradle build declares a dependency as a string group:name:version or with separate group, name and version arguments, in the Groovy and the Kotlin DSL (Declaring Dependencies (Gradle User Manual), https://docs.gradle.org/current/userguide/declaring_dependencies.html)
+           basis: a version catalog such as gradle/libs.versions.toml names a library with module = "group:name" or with group and name (Version Catalogs (Gradle User Manual), https://docs.gradle.org/current/userguide/version_catalogs.html)
+           basis: Maven Central keeps every artifact in a folder of its group and artifact id, so an artifact named by the tool can be looked up there (Maven Central repository, https://repo1.maven.org/maven2/)
+           the tool's own choice: an artifact is matched by its group and artifact id, never by its version, and the replacement is named the same way; an exclusion, a substitution and a value built from a property are not read as a dependency
+
+  ERROR    javax-artifact            examples/legacy/pom.xml:23
+           javax.validation:validation-api is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.validation:jakarta.validation-api (Jakarta Bean Validation 3.0)
+           rule: a dependency of a pom.xml, a Gradle build or a version catalog whose group and artifact id are an API artifact of Java EE that holds javax packages
+           specification: Jakarta Bean Validation 3.0, https://jakarta.ee/specifications/bean-validation/3.0/
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: a Maven dependency is named by its groupId and artifactId, and an exclusion inside a dependency keeps a transitive artifact out of the build (POM Reference (Apache Maven), https://maven.apache.org/pom.html)
+           basis: a Gradle build declares a dependency as a string group:name:version or with separate group, name and version arguments, in the Groovy and the Kotlin DSL (Declaring Dependencies (Gradle User Manual), https://docs.gradle.org/current/userguide/declaring_dependencies.html)
+           basis: a version catalog such as gradle/libs.versions.toml names a library with module = "group:name" or with group and name (Version Catalogs (Gradle User Manual), https://docs.gradle.org/current/userguide/version_catalogs.html)
+           basis: Maven Central keeps every artifact in a folder of its group and artifact id, so an artifact named by the tool can be looked up there (Maven Central repository, https://repo1.maven.org/maven2/)
+           the tool's own choice: an artifact is matched by its group and artifact id, never by its version, and the replacement is named the same way; an exclusion, a substitution and a value built from a property are not read as a dependency
+
+  ERROR    javax-artifact            examples/legacy/reports/build.gradle:6
+           javax.ws.rs:javax.ws.rs-api is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.ws.rs:jakarta.ws.rs-api (Jakarta RESTful Web Services 3.0)
+           rule: a dependency of a pom.xml, a Gradle build or a version catalog whose group and artifact id are an API artifact of Java EE that holds javax packages
+           specification: Jakarta RESTful Web Services 3.0, https://jakarta.ee/specifications/restful-ws/3.0/
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: a Maven dependency is named by its groupId and artifactId, and an exclusion inside a dependency keeps a transitive artifact out of the build (POM Reference (Apache Maven), https://maven.apache.org/pom.html)
+           basis: a Gradle build declares a dependency as a string group:name:version or with separate group, name and version arguments, in the Groovy and the Kotlin DSL (Declaring Dependencies (Gradle User Manual), https://docs.gradle.org/current/userguide/declaring_dependencies.html)
+           basis: a version catalog such as gradle/libs.versions.toml names a library with module = "group:name" or with group and name (Version Catalogs (Gradle User Manual), https://docs.gradle.org/current/userguide/version_catalogs.html)
+           basis: Maven Central keeps every artifact in a folder of its group and artifact id, so an artifact named by the tool can be looked up there (Maven Central repository, https://repo1.maven.org/maven2/)
+           the tool's own choice: an artifact is matched by its group and artifact id, never by its version, and the replacement is named the same way; an exclusion, a substitution and a value built from a property are not read as a dependency
+
+  ERROR    javax-artifact            examples/legacy/reports/build.gradle:7
+           javax.inject:javax.inject is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.inject:jakarta.inject-api (Jakarta Dependency Injection 2.0)
+           rule: a dependency of a pom.xml, a Gradle build or a version catalog whose group and artifact id are an API artifact of Java EE that holds javax packages
+           specification: Jakarta Dependency Injection 2.0, https://jakarta.ee/specifications/dependency-injection/2.0/
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: a Maven dependency is named by its groupId and artifactId, and an exclusion inside a dependency keeps a transitive artifact out of the build (POM Reference (Apache Maven), https://maven.apache.org/pom.html)
+           basis: a Gradle build declares a dependency as a string group:name:version or with separate group, name and version arguments, in the Groovy and the Kotlin DSL (Declaring Dependencies (Gradle User Manual), https://docs.gradle.org/current/userguide/declaring_dependencies.html)
+           basis: a version catalog such as gradle/libs.versions.toml names a library with module = "group:name" or with group and name (Version Catalogs (Gradle User Manual), https://docs.gradle.org/current/userguide/version_catalogs.html)
+           basis: Maven Central keeps every artifact in a folder of its group and artifact id, so an artifact named by the tool can be looked up there (Maven Central repository, https://repo1.maven.org/maven2/)
+           the tool's own choice: an artifact is matched by its group and artifact id, never by its version, and the replacement is named the same way; an exclusion, a substitution and a value built from a property are not read as a dependency
+
+  ERROR    javax-import              examples/legacy/reports/src/main/kotlin/com/larkspur/reports/ReportResource.kt:3
+           import javax.inject.Inject: moved to jakarta.inject.Inject (Jakarta Dependency Injection 2.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta Dependency Injection 2.0, https://jakarta.ee/specifications/dependency-injection/2.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/reports/src/main/kotlin/com/larkspur/reports/ReportResource.kt:4
+           import javax.ws.rs.GET: moved to jakarta.ws.rs.GET (Jakarta RESTful Web Services 3.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta RESTful Web Services 3.0, https://jakarta.ee/specifications/restful-ws/3.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/reports/src/main/kotlin/com/larkspur/reports/ReportResource.kt:5
+           import javax.ws.rs.Path: moved to jakarta.ws.rs.Path (Jakarta RESTful Web Services 3.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta RESTful Web Services 3.0, https://jakarta.ee/specifications/restful-ws/3.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/reports/src/main/kotlin/com/larkspur/reports/ReportResource.kt:6
+           import javax.ws.rs.core.MediaType: moved to jakarta.ws.rs.core.MediaType (Jakarta RESTful Web Services 3.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta RESTful Web Services 3.0, https://jakarta.ee/specifications/restful-ws/3.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/AppConfig.java:3
+           import static javax.persistence.LockModeType.PESSIMISTIC_WRITE: moved to jakarta.persistence.LockModeType.PESSIMISTIC_WRITE (Jakarta Persistence 3.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta Persistence 3.0, https://jakarta.ee/specifications/persistence/3.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/AppConfig.java:6
+           import javax.transaction.Transactional: moved to jakarta.transaction.Transactional (Jakarta Transactions 2.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta Transactions 2.0, https://jakarta.ee/specifications/transactions/2.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/model/Book.java:3
+           import javax.persistence.*: moved to jakarta.persistence.* (Jakarta Persistence 3.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta Persistence 3.0, https://jakarta.ee/specifications/persistence/3.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-qualified-name      examples/legacy/src/main/java/com/larkspur/books/model/Book.java:15
+           javax.validation.constraints.NotNull is written out in full: moved to jakarta.validation.constraints.NotNull (Jakarta Bean Validation 3.0)
+           rule: a fully qualified javax name in the code of a Java or Kotlin file, such as @javax.persistence.Entity, that moved to jakarta, outside the imports and the package declaration
+           specification: Jakarta Bean Validation 3.0, https://jakarta.ee/specifications/bean-validation/3.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: comments, string literals and text blocks are tokens of their own, so a name written inside a comment or a string is not a reference to a class (The Java Language Specification, Java SE 21, Chapter 3: Lexical Structure (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html)
+           the tool's own choice: a name in a comment or a string is not code and is not reported by this rule; a name that follows a dot is part of a longer name
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:4
+           import javax.annotation.PostConstruct: moved to jakarta.annotation.PostConstruct (Jakarta Annotations 2.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta Annotations 2.0, https://jakarta.ee/specifications/annotations/2.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:7
+           import javax.servlet.ServletException: moved to jakarta.servlet.ServletException (Jakarta Servlet 5.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta Servlet 5.0, https://jakarta.ee/specifications/servlet/5.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:8
+           import javax.servlet.annotation.WebServlet: moved to jakarta.servlet.annotation.WebServlet (Jakarta Servlet 5.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta Servlet 5.0, https://jakarta.ee/specifications/servlet/5.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:9
+           import javax.servlet.http.HttpServlet: moved to jakarta.servlet.http.HttpServlet (Jakarta Servlet 5.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta Servlet 5.0, https://jakarta.ee/specifications/servlet/5.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:10
+           import javax.servlet.http.HttpServletRequest: moved to jakarta.servlet.http.HttpServletRequest (Jakarta Servlet 5.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta Servlet 5.0, https://jakarta.ee/specifications/servlet/5.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:11
+           import javax.servlet.http.HttpServletResponse: moved to jakarta.servlet.http.HttpServletResponse (Jakarta Servlet 5.0)
+           rule: an import in a Java or Kotlin file of a class, a package (.*) or a static member whose javax name moved to jakarta in Jakarta EE 9, by the longest prefix of the mapping
+           specification: Jakarta Servlet 5.0, https://jakarta.ee/specifications/servlet/5.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: Spring Boot 3 uses the jakarta packages of Jakarta EE rather than javax, so the import statements of a project and its javax dependencies, such as javax.servlet:javax.servlet-api, change to their jakarta forms (Spring Boot 3.0 Migration Guide (Spring Boot wiki), https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           basis: a Kotlin file imports a single name, every name of a package with .*, or a name under another name with as (Packages and imports (Kotlin documentation), https://kotlinlang.org/docs/packages.html)
+           the tool's own choice: only the names of the mapping are reported: a javax name that moved, never one of the JDK and never one the mapping does not know; a static import and an import with as are read like any other
+
+  WARNING  partly-moved-import       examples/legacy/src/main/java/com/larkspur/books/AppConfig.java:5
+           import javax.annotation.*: only 7 classes of javax.annotation moved, PostConstruct, PreDestroy, Resource and 4 more, to jakarta.annotation (Jakarta Annotations 2.0); the other names of javax.annotation belong to other libraries and stay, so import the ones this file uses by name
+           rule: an import of javax.annotation.* (every name of the package), of which only the seven classes of Jakarta Annotations, such as PostConstruct, PreDestroy and Resource, moved to jakarta.annotation
+           specification: Jakarta Annotations 2.0, https://jakarta.ee/specifications/annotations/2.0/
+           basis: JDK 11 removed the Java EE modules, among them XML Binding, XML Web Services, Activation, the common annotations of javax.annotation and the transaction classes, so these now come from artifacts of their own (JEP 320: Remove the Java EE and CORBA Modules (OpenJDK), https://openjdk.org/jeps/320)
+           basis: an import names a class by its full name, a whole package with .*, or a static member, and a fully qualified name can also be written in the code without an import (The Java Language Specification, Java SE 21, Chapter 7: Packages and Modules (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html)
+           the tool's own choice: javax.annotation is shared: the classes of Jakarta Annotations moved, while other libraries keep names of their own there; without compiling the file the tool cannot tell which ones it uses, so this is a warning
+
+  WARNING  javax-name-in-text        examples/legacy/src/main/java/com/larkspur/books/AppConfig.java:19
+           the string "javax.ws.rs.core.Application" names javax.ws.rs.core.Application, which moved to jakarta.ws.rs.core.Application (Jakarta RESTful Web Services 3.0); a class name read by reflection, a property name or a key must change with it
+           rule: a string literal of a Java or Kotlin file, or a text or an attribute value of a deployment descriptor, that holds a javax name that moved to jakarta
+           specification: Jakarta RESTful Web Services 3.0, https://jakarta.ee/specifications/restful-ws/3.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: comments, string literals and text blocks are tokens of their own, so a name written inside a comment or a string is not a reference to a class (The Java Language Specification, Java SE 21, Chapter 3: Lexical Structure (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html)
+           basis: a Kotlin string can be written in triple quotes, where escapes are plain text, and any string can hold template expressions that are code (Strings (Kotlin documentation), https://kotlinlang.org/docs/strings.html)
+           the tool's own choice: a string may name a class to load by reflection, a property such as javax.persistence.jdbc.url or only words; the tool cannot tell which, so this is a warning; a name written with slashes is read with dots
+
+  WARNING  javax-name-in-text        examples/legacy/src/main/java/com/larkspur/books/model/Book.java:18
+           the string "javax.persistence.lock.timeout" names javax.persistence.lock.timeout, which moved to jakarta.persistence.lock.timeout (Jakarta Persistence 3.0); a class name read by reflection, a property name or a key must change with it
+           rule: a string literal of a Java or Kotlin file, or a text or an attribute value of a deployment descriptor, that holds a javax name that moved to jakarta
+           specification: Jakarta Persistence 3.0, https://jakarta.ee/specifications/persistence/3.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: comments, string literals and text blocks are tokens of their own, so a name written inside a comment or a string is not a reference to a class (The Java Language Specification, Java SE 21, Chapter 3: Lexical Structure (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html)
+           basis: a Kotlin string can be written in triple quotes, where escapes are plain text, and any string can hold template expressions that are code (Strings (Kotlin documentation), https://kotlinlang.org/docs/strings.html)
+           the tool's own choice: a string may name a class to load by reflection, a property such as javax.persistence.jdbc.url or only words; the tool cannot tell which, so this is a warning; a name written with slashes is read with dots
+
+  WARNING  old-descriptor-namespace  examples/legacy/src/main/resources/META-INF/persistence.xml:2
+           xmlns="http://java.sun.com/xml/ns/persistence" is a namespace of the descriptors before Jakarta EE 9; Jakarta EE 9 and later use https://jakarta.ee/xml/ns/persistence, with the schema location and the version that go with it
+           rule: an xmlns or xmlns:prefix attribute of a deployment descriptor (web.xml, persistence.xml, beans.xml, faces-config.xml and the others of docs/method.md) whose value is a namespace of Java EE or J2EE
+           basis: the deployment descriptor schemas of Jakarta EE 9 and later share the namespace https://jakarta.ee/xml/ns/jakartaee, and Persistence and Validation have namespaces of their own under jakarta.ee (Jakarta EE XML Schemas (jakarta.ee), https://jakarta.ee/xml/ns/jakartaee/)
+           basis: the descriptors of Java EE 7 and 8 use the namespace http://xmlns.jcp.org/xml/ns/javaee, those of Java EE 5 and 6 http://java.sun.com/xml/ns/javaee, and J2EE 1.4 http://java.sun.com/xml/ns/j2ee (Java EE XML Schemas (xmlns.jcp.org), https://xmlns.jcp.org/xml/ns/javaee/)
+           basis: the persistence.xml and orm.xml schemas of Java EE used the namespaces http://java.sun.com/xml/ns/persistence and http://xmlns.jcp.org/xml/ns/persistence (Java Persistence XML Schemas (xmlns.jcp.org), https://xmlns.jcp.org/xml/ns/persistence/)
+           basis: a namespace is declared with an xmlns or xmlns:prefix attribute whose value is the name of the namespace, a URI that is compared as a string (Namespaces in XML 1.0 (W3C), https://www.w3.org/TR/xml-names/)
+           the tool's own choice: a warning and not an error, because whether a runtime still reads a descriptor of an older version depends on the runtime; the namespace is compared as a string, without a slash at its end
+
+  WARNING  javax-name-in-text        examples/legacy/src/main/resources/META-INF/persistence.xml:6
+           the attribute name="javax.persistence.jdbc.url" of <property> names javax.persistence.jdbc.url, which moved to jakarta.persistence.jdbc.url (Jakarta Persistence 3.0); a class name read by reflection, a property name or a key must change with it
+           rule: a string literal of a Java or Kotlin file, or a text or an attribute value of a deployment descriptor, that holds a javax name that moved to jakarta
+           specification: Jakarta Persistence 3.0, https://jakarta.ee/specifications/persistence/3.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: comments, string literals and text blocks are tokens of their own, so a name written inside a comment or a string is not a reference to a class (The Java Language Specification, Java SE 21, Chapter 3: Lexical Structure (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html)
+           basis: a Kotlin string can be written in triple quotes, where escapes are plain text, and any string can hold template expressions that are code (Strings (Kotlin documentation), https://kotlinlang.org/docs/strings.html)
+           the tool's own choice: a string may name a class to load by reflection, a property such as javax.persistence.jdbc.url or only words; the tool cannot tell which, so this is a warning; a name written with slashes is read with dots
+
+  WARNING  javax-service-file        examples/legacy/src/main/resources/META-INF/services/javax.servlet.ServletContainerInitializer:1
+           the service file is named for javax.servlet.ServletContainerInitializer, which moved to jakarta.servlet.ServletContainerInitializer (Jakarta Servlet 5.0); ServiceLoader looks the providers up under the new name, so this file must be renamed to jakarta.servlet.ServletContainerInitializer
+           rule: a file under META-INF/services whose name is a javax service that moved to jakarta, or a line of it that names a javax provider class that moved
+           specification: Jakarta Servlet 5.0, https://jakarta.ee/specifications/servlet/5.0/
+           basis: a provider is registered in a file under META-INF/services named for the full name of the service, which lists the full names of the provider classes one per line, with # starting a comment (ServiceLoader, Java SE 21 and JDK 21 API (Oracle), https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ServiceLoader.html)
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           the tool's own choice: a warning, like a string: the file is read by ServiceLoader at run time, so the compiler does not see it
+
+  WARNING  old-descriptor-namespace  examples/legacy/src/main/webapp/WEB-INF/web.xml:2
+           xmlns="http://xmlns.jcp.org/xml/ns/javaee" is a namespace of the descriptors before Jakarta EE 9; Jakarta EE 9 and later use https://jakarta.ee/xml/ns/jakartaee, with the schema location and the version that go with it
+           rule: an xmlns or xmlns:prefix attribute of a deployment descriptor (web.xml, persistence.xml, beans.xml, faces-config.xml and the others of docs/method.md) whose value is a namespace of Java EE or J2EE
+           basis: the deployment descriptor schemas of Jakarta EE 9 and later share the namespace https://jakarta.ee/xml/ns/jakartaee, and Persistence and Validation have namespaces of their own under jakarta.ee (Jakarta EE XML Schemas (jakarta.ee), https://jakarta.ee/xml/ns/jakartaee/)
+           basis: the descriptors of Java EE 7 and 8 use the namespace http://xmlns.jcp.org/xml/ns/javaee, those of Java EE 5 and 6 http://java.sun.com/xml/ns/javaee, and J2EE 1.4 http://java.sun.com/xml/ns/j2ee (Java EE XML Schemas (xmlns.jcp.org), https://xmlns.jcp.org/xml/ns/javaee/)
+           basis: the persistence.xml and orm.xml schemas of Java EE used the namespaces http://java.sun.com/xml/ns/persistence and http://xmlns.jcp.org/xml/ns/persistence (Java Persistence XML Schemas (xmlns.jcp.org), https://xmlns.jcp.org/xml/ns/persistence/)
+           basis: a namespace is declared with an xmlns or xmlns:prefix attribute whose value is the name of the namespace, a URI that is compared as a string (Namespaces in XML 1.0 (W3C), https://www.w3.org/TR/xml-names/)
+           the tool's own choice: a warning and not an error, because whether a runtime still reads a descriptor of an older version depends on the runtime; the namespace is compared as a string, without a slash at its end
+
+  WARNING  javax-name-in-text        examples/legacy/src/main/webapp/WEB-INF/web.xml:5
+           the value "javax.faces.PROJECT_STAGE" of <param-name> names javax.faces.PROJECT_STAGE, which moved to jakarta.faces.PROJECT_STAGE (Jakarta Server Faces 3.0); a class name read by reflection, a property name or a key must change with it
+           rule: a string literal of a Java or Kotlin file, or a text or an attribute value of a deployment descriptor, that holds a javax name that moved to jakarta
+           specification: Jakarta Server Faces 3.0, https://jakarta.ee/specifications/faces/3.0/
+           basis: Jakarta EE 9 gives the specifications of Jakarta EE 8, with almost no change of function, under the new jakarta.* namespace, as a stable target for teams and tools that migrate their applications (Jakarta EE Platform 9 specification, section on the changes in Jakarta EE 9 (Eclipse Foundation), https://jakarta.ee/specifications/platform/9/jakarta-platform-spec-9.html)
+           basis: comments, string literals and text blocks are tokens of their own, so a name written inside a comment or a string is not a reference to a class (The Java Language Specification, Java SE 21, Chapter 3: Lexical Structure (Oracle), https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html)
+           basis: a Kotlin string can be written in triple quotes, where escapes are plain text, and any string can hold template expressions that are code (Strings (Kotlin documentation), https://kotlinlang.org/docs/strings.html)
+           the tool's own choice: a string may name a class to load by reflection, a property such as javax.persistence.jdbc.url or only words; the tool cannot tell which, so this is a warning; a name written with slashes is read with dots
+
+Read: examples/legacy
+
+  files          11: 4 java, 1 kotlin, 1 maven, 1 gradle, 1 catalog, 2 descriptor, 1 service
+  imports        26 read; javax imports 25: 13 moved, 1 of javax.annotation, not moved, 11 in the JDK
+  code names     javax names written out in full 2: 1 moved, 1 in the JDK
+  texts          javax names in strings and descriptor values 4: 4 moved
+  dependencies   8 read; 6 Java EE artifacts
+  descriptors    2 read; 2 with a namespace of Java EE
+  service files  1 read
+  mapping        32 moved prefixes, 7 moved classes, 30 JDK prefixes, 49 artifacts, 11 namespaces; 0 added and 0 ignored by the configuration
+
+This report lists the javax names, artifacts and descriptor namespaces it found in the files it was given, against the mapping of src/mapping.js. It does not compile the code, resolve dependencies or look inside the libraries a project uses, so a clean run does not mean the project builds and runs on Jakarta EE 9 or later (docs/limits.md).
+
+RESULT: FAIL - 20 errors (and 8 warnings)

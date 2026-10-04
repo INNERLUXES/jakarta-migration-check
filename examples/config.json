@@ -1,0 +1,4 @@
+{
+  "name": "Larkspur Books",
+  "exclude": { "add": ["**/gen/**"] }
+}

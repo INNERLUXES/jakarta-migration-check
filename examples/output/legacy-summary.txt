@@ -1,0 +1,121 @@
+jakarta-migration-check: examples/legacy
+input: examples/legacy (11 files: 4 java, 1 kotlin, 1 maven, 1 gradle, 1 catalog, 2 descriptor, 1 service)
+config: examples/config.json (Larkspur Books): 20 file patterns, 5 exclude patterns, no added moves, no ignored names; minimum severity notice
+rules: javax-import (error); javax-qualified-name (error); partly-moved-import (warning); javax-artifact (error); old-descriptor-namespace (warning); javax-name-in-text (warning); javax-service-file (warning)
+findings: 28 (20 error, 8 warning)
+
+Findings (28)
+
+  ERROR    javax-artifact            examples/legacy/gradle/libs.versions.toml:2
+           javax.xml.bind:jaxb-api is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.xml.bind:jakarta.xml.bind-api (Jakarta XML Binding 3.0)
+
+  ERROR    javax-artifact            examples/legacy/pom.xml:12
+           javax.servlet:javax.servlet-api is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.servlet:jakarta.servlet-api (Jakarta Servlet 5.0)
+
+  ERROR    javax-artifact            examples/legacy/pom.xml:18
+           javax.persistence:javax.persistence-api is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.persistence:jakarta.persistence-api (Jakarta Persistence 3.0)
+
+  ERROR    javax-artifact            examples/legacy/pom.xml:23
+           javax.validation:validation-api is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.validation:jakarta.validation-api (Jakarta Bean Validation 3.0)
+
+  ERROR    javax-artifact            examples/legacy/reports/build.gradle:6
+           javax.ws.rs:javax.ws.rs-api is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.ws.rs:jakarta.ws.rs-api (Jakarta RESTful Web Services 3.0)
+
+  ERROR    javax-artifact            examples/legacy/reports/build.gradle:7
+           javax.inject:javax.inject is a Java EE artifact that holds javax packages; Jakarta EE 9 and later name jakarta.inject:jakarta.inject-api (Jakarta Dependency Injection 2.0)
+
+  ERROR    javax-import              examples/legacy/reports/src/main/kotlin/com/larkspur/reports/ReportResource.kt:3
+           import javax.inject.Inject: moved to jakarta.inject.Inject (Jakarta Dependency Injection 2.0)
+
+  ERROR    javax-import              examples/legacy/reports/src/main/kotlin/com/larkspur/reports/ReportResource.kt:4
+           import javax.ws.rs.GET: moved to jakarta.ws.rs.GET (Jakarta RESTful Web Services 3.0)
+
+  ERROR    javax-import              examples/legacy/reports/src/main/kotlin/com/larkspur/reports/ReportResource.kt:5
+           import javax.ws.rs.Path: moved to jakarta.ws.rs.Path (Jakarta RESTful Web Services 3.0)
+
+  ERROR    javax-import              examples/legacy/reports/src/main/kotlin/com/larkspur/reports/ReportResource.kt:6
+           import javax.ws.rs.core.MediaType: moved to jakarta.ws.rs.core.MediaType (Jakarta RESTful Web Services 3.0)
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/AppConfig.java:3
+           import static javax.persistence.LockModeType.PESSIMISTIC_WRITE: moved to jakarta.persistence.LockModeType.PESSIMISTIC_WRITE (Jakarta Persistence 3.0)
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/AppConfig.java:6
+           import javax.transaction.Transactional: moved to jakarta.transaction.Transactional (Jakarta Transactions 2.0)
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/model/Book.java:3
+           import javax.persistence.*: moved to jakarta.persistence.* (Jakarta Persistence 3.0)
+
+  ERROR    javax-qualified-name      examples/legacy/src/main/java/com/larkspur/books/model/Book.java:15
+           javax.validation.constraints.NotNull is written out in full: moved to jakarta.validation.constraints.NotNull (Jakarta Bean Validation 3.0)
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:4
+           import javax.annotation.PostConstruct: moved to jakarta.annotation.PostConstruct (Jakarta Annotations 2.0)
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:7
+           import javax.servlet.ServletException: moved to jakarta.servlet.ServletException (Jakarta Servlet 5.0)
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:8
+           import javax.servlet.annotation.WebServlet: moved to jakarta.servlet.annotation.WebServlet (Jakarta Servlet 5.0)
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:9
+           import javax.servlet.http.HttpServlet: moved to jakarta.servlet.http.HttpServlet (Jakarta Servlet 5.0)
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:10
+           import javax.servlet.http.HttpServletRequest: moved to jakarta.servlet.http.HttpServletRequest (Jakarta Servlet 5.0)
+
+  ERROR    javax-import              examples/legacy/src/main/java/com/larkspur/books/web/OrderServlet.java:11
+           import javax.servlet.http.HttpServletResponse: moved to jakarta.servlet.http.HttpServletResponse (Jakarta Servlet 5.0)
+
+  WARNING  partly-moved-import       examples/legacy/src/main/java/com/larkspur/books/AppConfig.java:5
+           import javax.annotation.*: only 7 classes of javax.annotation moved, PostConstruct, PreDestroy, Resource and 4 more, to jakarta.annotation (Jakarta Annotations 2.0); the other names of javax.annotation belong to other libraries and stay, so import the ones this file uses by name
+
+  WARNING  javax-name-in-text        examples/legacy/src/main/java/com/larkspur/books/AppConfig.java:19
+           the string "javax.ws.rs.core.Application" names javax.ws.rs.core.Application, which moved to jakarta.ws.rs.core.Application (Jakarta RESTful Web Services 3.0); a class name read by reflection, a property name or a key must change with it
+
+  WARNING  javax-name-in-text        examples/legacy/src/main/java/com/larkspur/books/model/Book.java:18
+           the string "javax.persistence.lock.timeout" names javax.persistence.lock.timeout, which moved to jakarta.persistence.lock.timeout (Jakarta Persistence 3.0); a class name read by reflection, a property name or a key must change with it
+
+  WARNING  old-descriptor-namespace  examples/legacy/src/main/resources/META-INF/persistence.xml:2
+           xmlns="http://java.sun.com/xml/ns/persistence" is a namespace of the descriptors before Jakarta EE 9; Jakarta EE 9 and later use https://jakarta.ee/xml/ns/persistence, with the schema location and the version that go with it
+
+  WARNING  javax-name-in-text        examples/legacy/src/main/resources/META-INF/persistence.xml:6
+           the attribute name="javax.persistence.jdbc.url" of <property> names javax.persistence.jdbc.url, which moved to jakarta.persistence.jdbc.url (Jakarta Persistence 3.0); a class name read by reflection, a property name or a key must change with it
+
+  WARNING  javax-service-file        examples/legacy/src/main/resources/META-INF/services/javax.servlet.ServletContainerInitializer:1
+           the service file is named for javax.servlet.ServletContainerInitializer, which moved to jakarta.servlet.ServletContainerInitializer (Jakarta Servlet 5.0); ServiceLoader looks the providers up under the new name, so this file must be renamed to jakarta.servlet.ServletContainerInitializer
+
+  WARNING  old-descriptor-namespace  examples/legacy/src/main/webapp/WEB-INF/web.xml:2
+           xmlns="http://xmlns.jcp.org/xml/ns/javaee" is a namespace of the descriptors before Jakarta EE 9; Jakarta EE 9 and later use https://jakarta.ee/xml/ns/jakartaee, with the schema location and the version that go with it
+
+  WARNING  javax-name-in-text        examples/legacy/src/main/webapp/WEB-INF/web.xml:5
+           the value "javax.faces.PROJECT_STAGE" of <param-name> names javax.faces.PROJECT_STAGE, which moved to jakarta.faces.PROJECT_STAGE (Jakarta Server Faces 3.0); a class name read by reflection, a property name or a key must change with it
+
+Per package
+
+  from                                    to                                     findings  files  rules
+  javax.servlet                           jakarta.servlet                        7         3      javax-artifact 1, javax-import 5, javax-service-file 1
+  javax.persistence                       jakarta.persistence                    5         4      javax-artifact 1, javax-import 2, javax-name-in-text 2
+  javax.ws.rs                             jakarta.ws.rs                          5         3      javax-artifact 1, javax-import 3, javax-name-in-text 1
+  javax.annotation                        jakarta.annotation                     2         2      partly-moved-import 1, javax-import 1
+  javax.inject                            jakarta.inject                         2         2      javax-artifact 1, javax-import 1
+  javax.validation                        jakarta.validation                     2         2      javax-artifact 1, javax-qualified-name 1
+  http://java.sun.com/xml/ns/persistence  https://jakarta.ee/xml/ns/persistence  1         1      old-descriptor-namespace 1
+  http://xmlns.jcp.org/xml/ns/javaee      https://jakarta.ee/xml/ns/jakartaee    1         1      old-descriptor-namespace 1
+  javax.faces                             jakarta.faces                          1         1      javax-name-in-text 1
+  javax.transaction                       jakarta.transaction                    1         1      javax-import 1
+  javax.xml.bind                          jakarta.xml.bind                       1         1      javax-artifact 1
+
+Read: examples/legacy
+
+  files          11: 4 java, 1 kotlin, 1 maven, 1 gradle, 1 catalog, 2 descriptor, 1 service
+  imports        26 read; javax imports 25: 13 moved, 1 of javax.annotation, not moved, 11 in the JDK
+  code names     javax names written out in full 2: 1 moved, 1 in the JDK
+  texts          javax names in strings and descriptor values 4: 4 moved
+  dependencies   8 read; 6 Java EE artifacts
+  descriptors    2 read; 2 with a namespace of Java EE
+  service files  1 read
+  mapping        32 moved prefixes, 7 moved classes, 30 JDK prefixes, 49 artifacts, 11 namespaces; 0 added and 0 ignored by the configuration
+
+This report lists the javax names, artifacts and descriptor namespaces it found in the files it was given, against the mapping of src/mapping.js. It does not compile the code, resolve dependencies or look inside the libraries a project uses, so a clean run does not mean the project builds and runs on Jakarta EE 9 or later (docs/limits.md).
+
+RESULT: FAIL - 20 errors (and 8 warnings)
