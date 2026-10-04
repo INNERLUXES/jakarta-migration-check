@@ -1,0 +1,50 @@
+{
+  "name": "jakarta-migration-check",
+  "version": "1.0.0",
+  "description": "Reads a Java or Kotlin project and reports what still uses the javax names that moved to jakarta in Jakarta EE 9, the move Jakarta EE 9 and later and Spring Boot 3 need: imports and fully qualified names in .java and .kt files with their jakarta replacement, Java EE artifacts in pom.xml, Gradle builds and version catalogs with the Jakarta artifact, deployment descriptors in a namespace of Java EE, and strings and META-INF/services files that name a moved class. Never reports the javax packages of the JDK. Text, JSON and GitHub annotation output, exit codes for a pipeline, no dependencies.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "jakarta-migration-check": "bin/jakarta-migration-check.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "docs",
+    "examples",
+    "research",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.js\"",
+    "test:coverage": "node --test --experimental-test-coverage \"test/*.test.js\"",
+    "check": "node tools/check.mjs",
+    "example": "node tools/example.mjs"
+  },
+  "keywords": [
+    "java",
+    "kotlin",
+    "jakarta-ee",
+    "javax",
+    "spring-boot",
+    "migration",
+    "maven",
+    "gradle",
+    "linter",
+    "cli"
+  ],
+  "author": "INNERLUXES <info@innerluxes.dev>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/INNERLUXES/jakarta-migration-check.git"
+  },
+  "homepage": "https://innerluxes.dev/web-development/java"
+}
