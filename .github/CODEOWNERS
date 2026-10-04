@@ -1,0 +1,21 @@
+# Every change is reviewed by a maintainer.
+* @innerluxesdev
+
+# The mapping, the points of the public pages, the readers, the checks and the output decide every result and what is
+# read from the disk; changes need extra care.
+/src/mapping.js @innerluxesdev
+/src/data.js @innerluxesdev
+/research/ @innerluxesdev
+/src/files.js @innerluxesdev
+/src/glob.js @innerluxesdev
+/src/json.js @innerluxesdev
+/src/lexer.js @innerluxesdev
+/src/sources.js @innerluxesdev
+/src/xml.js @innerluxesdev
+/src/builds.js @innerluxesdev
+/src/kinds.js @innerluxesdev
+/src/config.js @innerluxesdev
+/src/analyse.js @innerluxesdev
+/src/rules.js @innerluxesdev
+/src/check.js @innerluxesdev
+/src/report.js @innerluxesdev
